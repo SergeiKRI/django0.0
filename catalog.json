@@ -1,0 +1,73 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Овощи",
+      "description": "Можно есть"
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Огурец",
+      "description": null
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 3,
+    "fields": {
+      "name": "фрукты",
+      "description": null
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "оборудование",
+      "description": null
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 1,
+    "fields": {
+      "date_created_at": "2024-05-24T09:04:51Z",
+      "name": "помидоры",
+      "description": "красные спелые",
+      "image": "",
+      "category": 1,
+      "price": 50,
+      "date_updated_at": "2024-05-24T09:05:40.950Z"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 2,
+    "fields": {
+      "date_created_at": "2024-05-24T09:29:22Z",
+      "name": "Яблоко",
+      "description": "красное твердое",
+      "image": "",
+      "category": 3,
+      "price": 35,
+      "date_updated_at": "2024-05-24T09:29:55.630Z"
+    }
+  },
+  {
+    "model": "catalog.products",
+    "pk": 3,
+    "fields": {
+      "date_created_at": "2024-05-24T09:30:18Z",
+      "name": "мышка",
+      "description": "",
+      "image": "",
+      "category": 4,
+      "price": 500,
+      "date_updated_at": "2024-05-24T09:30:40.854Z"
+    }
+  }
+]
