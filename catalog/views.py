@@ -4,6 +4,7 @@ from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from pytils.translit import slugify
 
 from catalog.forms import ProductsForm, VersionForm
@@ -18,13 +19,13 @@ class ProductsDetailView(DetailView):
     model = Products
 
 
-class ProductsCreateView(CreateView):
+class ProductsCreateView(LoginRequiredMixin, CreateView):
     model = Products
     form_class = ProductsForm
     success_url = reverse_lazy('catalog:products_list')
 
 
-class ProductsUpdateView(UpdateView):
+class ProductsUpdateView(LoginRequiredMixin, UpdateView):
     model = Products
     form_class = ProductsForm
     success_url = reverse_lazy('catalog:products_list')
@@ -58,7 +59,7 @@ class ProductsUpdateView(UpdateView):
         return self.object
 
 
-class ProductsDeleteView(DeleteView):
+class ProductsDeleteView(LoginRequiredMixin, DeleteView):
     model = Products
     success_url = reverse_lazy('catalog:products_list')
 
