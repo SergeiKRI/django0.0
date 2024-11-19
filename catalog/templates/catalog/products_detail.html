@@ -4,8 +4,10 @@
 <div class="row text-center">
     <div class="col-3">
         <div class="card mb-4 box-shadow">
+             {% if perms.product.can_unpublish_product or user == product.owner %}
              <h3><a type="button" class="btn btn-lg btn-block btn-outline-primary"  href="{% url 'catalog:product_update' object.pk %}">Редактировать</a></h3>
             <h3><a type="button" class="btn btn-lg btn-block btn-outline-warning"  href="{% url 'catalog:product_delete' object.pk %}">Удалить</a></h3>
+             {% endif %}
             <img class="card-img-top" src="{{ object.image | media_filter }}">
             <div class="card-header">
                 <h1 class="card-title pricing-card-title">{{ object.name }}</h1>

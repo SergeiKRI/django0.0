@@ -1,5 +1,6 @@
 from datetime import datetime
 
+from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
@@ -7,7 +8,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.contrib.auth.mixins import LoginRequiredMixin
 from pytils.translit import slugify
 
-from catalog.forms import ProductsForm, VersionForm
+from catalog.forms import ProductsForm, VersionForm, ProductsModeratorForm
 from catalog.models import Products, BlogRecord, Version
 
 
@@ -39,6 +40,14 @@ class ProductsUpdateView(LoginRequiredMixin, UpdateView):
             context_data['formset'] = ProductFormset(instance=self.object)
 
         return context_data
+
+    def get_form_class(self):
+        user = self.request.user
+        if user == self.object.owner:
+            return ProductsForm
+        if user.has_perm("product.can_unpublish_product"):
+            return ProductsModeratorForm
+        raise PermissionDenied
 
     def form_valid(self, form):
         context_data = self.get_context_data()

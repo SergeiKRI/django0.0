@@ -2,6 +2,8 @@ from datetime import datetime
 
 from django.db import models
 
+from users.models import User
+
 NULLABLE = {"blank": True, "null": True}
 
 
@@ -65,6 +67,8 @@ class Products(models.Model):
         help_text="ДД.ММ.ГГГГ",
         **NULLABLE
     )
+    publication_status = models.BooleanField(default=False)
+    owner = models.ForeignKey(User, verbose_name="Владелец", **NULLABLE, on_delete=models.SET_NULL)
 
     def __str__(self):
         return self.name
@@ -79,6 +83,9 @@ class Products(models.Model):
             "date_created_at",
             "date_updated_at",
         )
+        permissions = [
+            ('can_unpublish_product', 'Can Unpublish Product'),
+        ]
 
 
 class BlogRecord(models.Model):

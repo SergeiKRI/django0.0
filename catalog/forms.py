@@ -50,3 +50,9 @@ class VersionForm(ModelForm, StyleMixin):
     class Meta:
         model = Version
         fields = "__all__"
+
+
+class ProductsModeratorForm(ModelForm):
+    class Meta:
+        model = Products
+        fields = ["publication_status"]
