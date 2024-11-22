@@ -10,10 +10,16 @@ from pytils.translit import slugify
 
 from catalog.forms import ProductsForm, VersionForm, ProductsModeratorForm
 from catalog.models import Products, BlogRecord, Version
+from catalog.services import get_products_from_cache
 
 
 class ProductsListView(ListView):
     model = Products
+    template_name = "catalog/base.html"
+    context_object_name = "products"
+
+    def get_queryset(self):
+        return get_products_from_cache()
 
 
 class ProductsDetailView(DetailView):
